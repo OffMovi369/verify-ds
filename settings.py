@@ -16,7 +16,7 @@ class ModerRoles(enum.IntEnum):
     moderator = 1147634588030607420
     administrator = 1147634586369658971
 
-    @property
+    @classmethod
     def values(self):
         return [e.value for e in list(ModerRoles)]
 

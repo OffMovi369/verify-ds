@@ -43,6 +43,16 @@ async def access(interaction: discord.Interaction, member: discord.Member):
 		ephemeral=True
 	)
 
+@client.tree.error
+async def on_contex_menu(interaction: discord.Interaction, error):
+	match type(error):
+		case app_commands.errors.CheckFailure:
+			await interaction.response.send_message("У вас недостаточно прав!", ephemeral=True)
+		case _:
+			await interaction.response.send_message("Извините, произошла необработанная ошибка, сообщите о ней разработчику", ephemeral=True)
+			logging.error(f"app_commands error: {type(error)}")
+
+
 @client.event
 async def on_ready():
 	await client.tree.sync()
